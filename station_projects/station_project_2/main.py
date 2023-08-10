@@ -5,7 +5,7 @@ from additon import play_combinations as play_comb
 
 
 def roll_dices():
-    """Generate 2 random integers, and count there sum.
+    """Generate 2 random integers, and count their sum.
                         Returns:
                                 numbers (dict)
                      """

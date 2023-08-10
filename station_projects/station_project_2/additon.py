@@ -5,8 +5,8 @@ play_combinations = {
 }
 
 result_combinations = {
-    'win': 'You win',
+    'win': 'You won',
     'lose': 'You lose',
     'goal': 'Know your goal number is {}',
-    'rolled': 'Rolled the dice: {} + {} = {}'
+    'rolled': 'The sum of dice is {} + {} = {}'
 }
