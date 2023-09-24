@@ -1,29 +1,21 @@
-def is_password_long(text: str) -> bool:
-    return len(text) > 8
+def longest_word_and_length(words: list) -> tuple:
+    if not words:
+        return None, 0
 
+    longest_word = ""
+    max_length = 0
 
-def is_mix_letters(text: str) -> bool:
-    return text != text.upper() and text != text.lower()
+    for word in words:
+        if len(word) > max_length:
+            longest_word = word
+            max_length = len(word)
 
-
-def contains_number(text: str) -> bool:
-    return any(char.isdigit() for char in text)
-
-
-def contains_special_character(text: str) -> bool:
-    special_characters = '!@#$%^&*()_+*/?,.<>/;:'
-    return any(char for char in text if char in special_characters)
+    return longest_word, max_length
 
 
 if __name__ == '__main__':
-    input_message = ('.The password should be at least 8 characters long. \n .It should contain a mix of uppercase '
-                     'and lowercase letters. \n .It should include at least one digit (0-9). \n .It should include at '
-                     'least one special character (e.g., !, @, #, $, %, etc.). \n Enter a valid password. ')
+    input_list = input('Enter words. ').split()
+    longest_word, length = longest_word_and_length(input_list)
+    print('Longest word:', longest_word)
+    print('Length of longest word:', length)
 
-    security_options = {0: 'Weak', 1: 'Weak', 2: 'Moderate', 3: 'Strong', 4: 'Very Strong'}
-
-    password = input(input_message)
-    security_level = (is_password_long(password) + is_mix_letters(password) + contains_number(password) +
-                      contains_special_character(password))
-
-    print(f'The password is {security_options[security_level]}')

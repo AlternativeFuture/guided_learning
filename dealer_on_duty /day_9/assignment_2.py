@@ -1,20 +1,30 @@
-from collections import Counter
+def roman_to_decimal(roman_numeral):
+    roman_to_decimal_dict = {
+        'I': 1, 'V': 5, 'X': 10, 'L': 50,
+        'C': 100, 'D': 500, 'M': 1000
+    }
 
+    decimal_number = 0
+    prev_value = 0
 
-def extract_elements_with_frequency_greater_than_k(array: list, key: int) -> list:
-    element_counts = Counter(array)
-    result = [element for element, count in element_counts.items() if count > key]
+    for char in roman_numeral[::-1]:
+        current_value = roman_to_decimal_dict[char]
 
-    return result
+        if current_value >= prev_value:
+            decimal_number += current_value
+        else:
+            decimal_number -= current_value
+
+        prev_value = current_value
+
+    return decimal_number
 
 
 if __name__ == "__main__":
-    test_list = [4, 6, 4, 3, 3, 4, 3, 4, 3, 8]
-    k = 3
-    output = extract_elements_with_frequency_greater_than_k(test_list, key=k)
-    print("Output:", output)
+    roman_numeral = input("Enter a Roman numeral (up to 3999): ").upper()
 
-    test_list = [4, 6, 4, 3, 3, 4, 3, 4, 6, 6]
-    k = 2
-    output = extract_elements_with_frequency_greater_than_k(test_list, key=k)
-    print("Output:", output)
+    try:
+        decimal_number = roman_to_decimal(roman_numeral)
+        print("Decimal equivalent:", decimal_number)
+    except KeyError:
+        print("Invalid Roman numeral. Please enter a valid Roman numeral.")

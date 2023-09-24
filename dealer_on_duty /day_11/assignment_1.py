@@ -1,22 +1,23 @@
-from collections import Counter
-from statistics import mean, median
+def factorial(num: int) -> int:
+    if num == 0 or num == 1:
+        return 1
+
+    total = 1
+    for n in range(1, num + 1):
+        total *= n
+
+    return total
 
 
-def calculate_mean_median_mode(numbers: list) -> tuple:
-    mean_value = mean(numbers)
-    median_value = median(numbers)
-    counter = Counter(numbers)
-    mode_values = [k for k, v in counter.items() if v == max(counter.values())]
+if __name__ == '__main__':
+    input_number = input("Enter a non-negative number! ")
 
-    return mean_value, median_value, mode_values
+    try:
+        input_number = int(input_number)
+    except KeyError:
+        print('Invalid input! Please enter a number!')
 
-
-if __name__ == "__main__":
-    user_input = input("Enter a list of numbers separated by spaces: ")
-    nums = [int(num) for num in user_input.split()]
-
-    mean_value, median_value, mode_values = calculate_mean_median_mode(nums)
-
-    print("Mean:", mean_value)
-    print("Median:", median_value)
-    print("Mode:", mode_values)
+    if input_number >= 0:
+        print(f'Factorial of {input_number} = ', factorial(input_number))
+    else:
+        print('Invalid input! Enter a non-negative number!')

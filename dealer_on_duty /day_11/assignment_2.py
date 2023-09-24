@@ -1,30 +1,29 @@
-def roman_to_decimal(roman_numeral):
-    roman_to_decimal_dict = {
-        'I': 1, 'V': 5, 'X': 10, 'L': 50,
-        'C': 100, 'D': 500, 'M': 1000
-    }
-
-    decimal_number = 0
-    prev_value = 0
-
-    for char in roman_numeral[::-1]:  # Reverse traversal of the Roman numeral
-        current_value = roman_to_decimal_dict[char]
-
-        if current_value >= prev_value:
-            decimal_number += current_value
-        else:
-            decimal_number -= current_value
-
-        prev_value = current_value
-
-    return decimal_number
+def is_password_long(text: str) -> bool:
+    return len(text) > 8
 
 
-if __name__ == "__main__":
-    roman_numeral = input("Enter a Roman numeral (up to 3999): ").upper()
+def is_mix_letters(text: str) -> bool:
+    return text != text.upper() and text != text.lower()
 
-    try:
-        decimal_number = roman_to_decimal(roman_numeral)
-        print("Decimal equivalent:", decimal_number)
-    except KeyError:
-        print("Invalid Roman numeral. Please enter a valid Roman numeral.")
+
+def contains_number(text: str) -> bool:
+    return any(char.isdigit() for char in text)
+
+
+def contains_special_character(text: str) -> bool:
+    special_characters = '!@#$%^&*()_+*/?,.<>/;:'
+    return any(char for char in text if char in special_characters)
+
+
+if __name__ == '__main__':
+    input_message = ('.The password should be at least 8 characters long. \n .It should contain a mix of uppercase '
+                     'and lowercase letters. \n .It should include at least one digit (0-9). \n .It should include at '
+                     'least one special character (e.g., !, @, #, $, %, etc.). \n Enter a valid password. ')
+
+    security_options = {0: 'Weak', 1: 'Weak', 2: 'Moderate', 3: 'Strong', 4: 'Very Strong'}
+
+    password = input(input_message)
+    security_level = (is_password_long(password) + is_mix_letters(password) + contains_number(password) +
+                      contains_special_character(password))
+
+    print(f'The password is {security_options[security_level]}')
